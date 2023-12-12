@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="View\FormChangePass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\FormLock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\FormMgr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\FormVerify.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

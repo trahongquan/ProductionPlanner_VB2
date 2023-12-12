@@ -1,0 +1,45 @@
+CREATE DATABASE ProductDB;
+GO
+
+USE ProductDB
+GO
+
+CREATE TABLE Plans
+(
+	id INT IDENTITY(1,1) PRIMARY KEY,
+	name VARCHAR(128) UNIQUE NOT NULL,
+	author VARCHAR(128) NOT NULL,
+	creat_date VARCHAR(64) NOT NULL,
+	list_product TEXT NULL,
+	total_profit REAL NOT NULL
+)
+	
+
+CREATE TABLE Products
+(
+	id INT IDENTITY(1,1) PRIMARY KEY,
+	name VARCHAR(128) UNIQUE NOT NULL,
+	material_cost REAL NOT NULL,
+	labor_cost REAL NOT NULL,
+	_lower INT NOT NULL,
+	_upper INT NOT NULL,
+	profit REAL NOT NULL
+)
+GO
+
+CREATE TABLE Capacity
+(
+
+	budget VARCHAR(64) NOT NULL,
+	total_working_hours VARCHAR(64) NOT NULL
+)
+GO
+
+CREATE TABLE Manager
+(
+	id INT IDENTITY(1, 1) PRIMARY KEY,
+	username VARCHAR(128) UNIQUE NOT NULL,
+	password VARCHAR(128) NOT NULL,
+	edit_right BIT NOT NULL
+)
+GO
