@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Nu7dMhqADUQ7Y30gJ+f6yX75pbPad9Zhdx+2oHSNBEE155YRRZ6lP8nY5+g8MszwOuE/tPS7XmWyoakrHzg/fw==",
+  "dgSpecHash": "TW+aueyfsYtP86GOwHtY1Az7tlJsfGPJuZt9kUwEesrc6RRFynkDl3xiQc2aRE6RAz4+jCxoROi7ukTxWF5Whw==",
   "success": true,
-  "projectFilePath": "D:\\VB2\\3. Ki.III\\HTTQD\\ProductionPlanner\\ProductionPlanner\\ProductionPlanner.csproj",
+  "projectFilePath": "D:\\VB2\\4. Ki.IV\\HTTQD\\ProductionPlanner_VB2\\ProductionPlanner\\ProductionPlanner.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Quan\\.nuget\\packages\\closedxml\\0.100.3\\closedxml.0.100.3.nupkg.sha512",
     "C:\\Users\\Quan\\.nuget\\packages\\documentformat.openxml\\2.16.0\\documentformat.openxml.2.16.0.nupkg.sha512",

@@ -4,7 +4,7 @@ namespace ProductionPlanner.Model
 {
     internal class Connection
     {
-        private static string link = @"Data Source=DESKTOP-SEBD228\SQLEXPRESS;Initial Catalog=ProductDB;Integrated Security=True";
+        private static string link = @"Data Source=Trhquan\TRHQUANMS;Initial Catalog=ProductDB;Integrated Security=True";
 
         public Connection()
         {
