@@ -1,4 +1,5 @@
-﻿using ProductionPlanner.Model;
+﻿using DocumentFormat.OpenXml.Bibliography;
+using ProductionPlanner.Model;
 
 namespace ProductionPlanner.Object
 {
@@ -63,13 +64,38 @@ namespace ProductionPlanner.Object
             this.lower = lower;
             this.upper = upper;
         }
+        public Product(Product product)
+        {
+            if (lower < 0)
+            { lower = 0; }
+
+            if (upper <= 0)
+            {
+                upper = Int32.MaxValue;
+            }
+
+            if (lower > upper)
+            {
+                MessageBox.Show("Lower must smaller of equal than Upper");
+                throw new Exception("Lower must smaller of equal than Upper");
+            }
+
+            Cryption cryption = new Cryption();
+            this.name = product.name;
+            //this.name = cryption.getDecrypt(product.name);
+            this.material_cost = product.material_cost;
+            this.labor_cost = product.labor_cost;
+            this.profit = product.profit;
+            this.lower = product.lower;
+            this.upper = product.upper;
+        }
         public string Name { get => name; set => name = value; }
         public double Material_cost { get => material_cost; set => material_cost = value; }
         public double Labor_cost { get => labor_cost; set => labor_cost = value; }
         public double Profit { get => profit; set => profit = value; }
         public int Lower { get => lower; set => lower = value; }
         public int Upper { get => upper; set => upper = value; }
-        public int Id { get => id;}
+        public int Id { get => id; set => upper = value;}
         public int Quantity { get => quantity; set => quantity = value; }
     }
 }

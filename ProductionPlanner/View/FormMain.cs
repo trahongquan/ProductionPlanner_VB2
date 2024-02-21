@@ -2,6 +2,7 @@
 using ProductionPlanner.Object;
 using ClosedXML.Excel;
 using System.Data;
+using static DocumentFormat.OpenXml.Packaging.RelationshipErrorHandler;
 
 namespace ProductionPlanner.View
 {
@@ -66,6 +67,7 @@ namespace ProductionPlanner.View
             {
                 tran_to_Vie();
             }
+            RowEnter();
         }
 
         #region Init
@@ -95,7 +97,12 @@ namespace ProductionPlanner.View
                 }
                 //edit_table();
 
-                dtgv_capacity.Rows[dtgv_capacity.Rows.Count - 1].Selected = true;
+                if (dtgv_capacity.Rows.Count > 1)
+                {
+                    dtgv_capacity.Rows[0].Selected = true;
+                    RowEnter();
+                } 
+                if (dtgv_plan.Rows.Count > 1) dtgv_plan.Rows[0].Selected = true;
 
 
                 for (int i = 0; i < plans.Count; ++i)
@@ -148,6 +155,7 @@ namespace ProductionPlanner.View
                 Convert.ToDouble(dtgv_plan.Rows[i].Cells[5].Value.ToString()),  // profit
                 true);
 
+            if (dtgv_plan.Rows[i].Cells[4].Value.ToString().Equals("")) return plan;
             List<int> ids = get_list_product(dtgv_plan.Rows[i].Cells[4].Value.ToString());
             for (int j = 0; j < products.Count; ++j)
             {
@@ -336,8 +344,10 @@ namespace ProductionPlanner.View
                 }
             }
 
+            //int id = product_basic_id = ++product_basic_id;
+            //++product_basic_id;
             return new Product(
-                ++plan_curent_id,
+                ++product_basic_id,
                 name,
                 Convert.ToDouble(txt_material.Text),
                 Convert.ToDouble(txt_labor.Text),
@@ -384,8 +394,13 @@ namespace ProductionPlanner.View
                 dtgv_product.Rows.Add(product.Name, product.Material_cost.ToString(),
                     product.Labor_cost.ToString(), product.Lower.ToString(), product.Upper.ToString(),
                         product.Profit.ToString());
+                queryProduct.insert(new Product(product));
+                reloadToolStripMenuItem1_Click(sender, e);
             }
-            catch { }
+            catch
+            {
+                MessageBox.Show("Lỗi add item product");
+            }
         }
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
@@ -396,9 +411,6 @@ namespace ProductionPlanner.View
                 int idx = dtgv_product.SelectedRows[0].Index;
                 Product product = get_product_from_txtbox(products[idx].Id);
                 products[idx] = product;
-
-
-
                 for (int i = 0; i < plans.Count; ++i)
                 {
                     if (plans[i].update_product(product))
@@ -411,6 +423,9 @@ namespace ProductionPlanner.View
                 dtgv_product.Rows[idx].Cells[3].Value = product.Lower;
                 dtgv_product.Rows[idx].Cells[4].Value = product.Upper;
                 dtgv_product.Rows[idx].Cells[5].Value = product.Profit;
+                
+                queryProduct.update(product);
+                reloadToolStripMenuItem1_Click(sender, e);
             }
             catch
             {
@@ -424,16 +439,27 @@ namespace ProductionPlanner.View
             try
             {
                 int idx = dtgv_product.SelectedRows[0].Index;
+
+                int idP = products[idx].Id;
+
                 products.RemoveAt(idx);
 
                 dtgv_product.Rows.RemoveAt(idx);
 
-                idx = products[idx].Id;
+                try
+                {
+                    queryProduct.delete(idP);
+                }
+                catch
+                {
+                    //tính cả trường hợp không tồn tại trong CSDL
+                }
                 for (int i = 0; i < plans.Count; ++i)
                 {
                     if (plans[i].remove_product(idx))
                         Update_plan(i);
                 }
+                reloadToolStripMenuItem1_Click(sender, e);
             }
             catch
             { }
@@ -451,7 +477,7 @@ namespace ProductionPlanner.View
                 txt_lower.Text = dtgv_product.SelectedRows[0].Cells[3].Value.ToString();
                 txt_upper.Text = dtgv_product.SelectedRows[0].Cells[4].Value.ToString();
                 txt_product_profit.Text = dtgv_product.SelectedRows[0].Cells[5].Value.ToString();
-                txt_quantity.Text = dtgv_product.SelectedRows[0].Cells[6].Value.ToString();
+                txt_quantity.Text = dtgv_product.SelectedRows[0].Cells[6].Value != null ? dtgv_product.SelectedRows[0].Cells[6].Value.ToString() : "";
             }
             catch
             { }
@@ -610,14 +636,20 @@ namespace ProductionPlanner.View
         private void dtgv_plan_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             timer1.Stop();
+            RowEnter();
             timer1.Start();
+
+        }
+
+        private void RowEnter()
+        {
             try
             {
                 int idx = dtgv_plan.SelectedRows[0].Index;
                 txt_plan_name.Text = dtgv_plan.Rows[idx].Cells[0].Value.ToString();
                 txt_author.Text = dtgv_plan.Rows[idx].Cells[1].Value.ToString();
                 dtpk_creat.Text = DateTime.Parse(dtgv_plan.Rows[idx].Cells[2].Value.ToString()).ToShortDateString();
-                txt_total_profit.Text = dtgv_plan.Rows[idx].Cells[4].Value.ToString();
+                txt_total_profit.Text = dtgv_plan.Rows[idx].Cells[4].Value != null ? dtgv_plan.Rows[idx].Cells[4].Value.ToString() : "";
                 txt_num.Text = plans[idx].List_product.Count.ToString();
 
                 for (int i = 0; i < products.Count; ++i)
@@ -639,6 +671,7 @@ namespace ProductionPlanner.View
             }
             catch { }
         }
+
         #endregion
 
         #region Capacity
@@ -758,10 +791,7 @@ namespace ProductionPlanner.View
         {
             timer1.Stop();
             Form fm = new FormMgr();
-            this.Hide();
             fm.ShowDialog();
-
-            this.Show();
             timer1.Start();
 
         }
@@ -807,93 +837,46 @@ namespace ProductionPlanner.View
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             timer1.Stop();
-            if (!is_change)
-            {
-                return;
-            }
-
-            DialogResult dlr = new DialogResult();
-
-            dlr = (DialogResult)MessageBox.Show("Save changes?", "Accept", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (dlr.Equals(DialogResult.No))
-            {
-                return;
-            }
-            #region Product
-            int n = products.Count;
-
-            //Edit + Delete
-            for (int id = 1; id <= product_basic_id; ++id)
-            {
-                for (int idx = 0; idx < n; ++idx)
-                {
-                    if (products[idx].Id == id)
-                    {
-                        queryProduct.update(products[idx]);
-                        break;
-                    }
-
-                    if (products[idx].Id >= product_basic_id)
-                    {
-                        // ko co trong list
-                        queryProduct.delete(id);
-                        break;
-                    }
-                }
-            }
-
-            // Add
-            for (int i = 0; i < n; ++i)
-            {
-                if (products[i].Id > product_basic_id)
-                {
-                    queryProduct.insert(products[i]);
-                }
-            }
-            #endregion
-
-            #region Plan
-            n = plans.Count;
-
-            //Edit + Delete
-            for (int i = 1; i <= plan_basic_id; ++i)
-            {
-                for (int idx = 0; idx < n; ++idx)
-                {
-                    if (plans[idx].Id == i)
-                    {
-                        queryPlan.update(plans[idx]);
-                        break;
-                    }
-                    if (plans[idx].Id >= plan_basic_id)
-                    {
-                        // ko co trong list
-                        queryPlan.delete(i);
-                        break;
-                    }
-                }
-            }
-
-            // Add
-            for (int i = 0; i < n; ++i)
-            {
-                if (plans[i].Id > plan_basic_id)
-                {
-                    queryPlan.insert(plans[i]);
-                }
-            }
-            #endregion
+            //SaveProject();
         }
+
         private void changePassToolStripMenuItem_Click(object sender, EventArgs e)
         {
             timer1.Stop();
             FormChangePass frm = new FormChangePass(user, pass);
-            this.Hide();
             frm.ShowDialog();
-            this.Show();
             timer1.Start();
         }
+
+        private void reportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            timer1.Start();
+
+            using (SaveFileDialog sfd = new SaveFileDialog()
+            {
+                Filter = "Excel Workbook|*.xlsx"
+            })
+            {
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        using (XLWorkbook workbook = new XLWorkbook())
+                        {
+                            workbook.Worksheets.Add((DataTable)dtgv_product.DataSource, "Products List");
+                            workbook.SaveAs(sfd.FileName);
+                            MessageBox.Show("Sucessfuly Export to Excel", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Failed Export to Excel", "Fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
         #endregion
 
         #region Translate
@@ -1032,33 +1015,123 @@ namespace ProductionPlanner.View
         }
         #endregion
 
-        private void reportToolStripMenuItem_Click(object sender, EventArgs e)
+        private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            timer1.Stop();
-            timer1.Start();
 
-            using (SaveFileDialog sfd = new SaveFileDialog()
+        }
+
+        private void reloadToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            edit_table();
+            for (int i = 0; i < plans.Count; ++i)
             {
-                Filter = "Excel Workbook|*.xlsx"
-            })
+                Update_plan(i);
+            }
+        }
+
+        private void SaveProject()
+        {
+            if (!is_change)
             {
-                if (sfd.ShowDialog() == DialogResult.OK)
+                return;
+            }
+
+            DialogResult dlr = new DialogResult();
+
+            dlr = (DialogResult)MessageBox.Show("Save changes?", "Accept", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dlr.Equals(DialogResult.No))
+            {
+                return;
+            }
+            #region Product
+            int n = products.Count;
+
+            //Edit + Delete
+            for (int id = 1; id <= product_basic_id; ++id)
+            {
+                for (int idx = 0; idx < n; ++idx)
                 {
-                    try
+                    if (products[idx].Id == id)
                     {
-                        using (XLWorkbook workbook = new XLWorkbook())
-                        {
-                            workbook.Worksheets.Add((DataTable)dtgv_product.DataSource, "Products List");
-                            workbook.SaveAs(sfd.FileName);
-                            MessageBox.Show("Sucessfuly Export to Excel", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
+                        queryProduct.update(products[idx]);
+                        break;
                     }
-                    catch
+
+                    if (products[idx].Id >= product_basic_id)
                     {
-                        MessageBox.Show("Failed Export to Excel", "Fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        // ko co trong list
+                        queryProduct.delete(id);
+                        break;
                     }
                 }
             }
+
+            // Add
+            for (int i = 0; i < n; ++i)
+            {
+                if (products[i].Id > product_curent_id)
+                {
+
+                    try
+                    {
+                        Product findProduct = queryProduct.get_Product_by_name(products[i].Name);
+                        findProduct.Id = products[i].Id;
+                        findProduct.Name = products[i].Name;
+                        findProduct.Labor_cost = products[i].Labor_cost;
+                        findProduct.Material_cost = products[i].Material_cost;
+                        findProduct.Lower = products[i].Lower;
+                        findProduct.Upper = products[i].Upper;
+                        findProduct.Profit = products[i].Profit;
+                        queryProduct.update(findProduct);
+                    }
+                    catch
+                    {
+                        queryProduct.insert(new Product(products[i]));
+                        //MessageBox.Show("Lỗi tại ProductAdd");
+                    }
+
+
+                }
+            }
+            #endregion
+
+            #region Plan
+            n = plans.Count;
+
+            //Edit + Delete
+            for (int i = 1; i <= plan_basic_id; ++i)
+            {
+                for (int idx = 0; idx < n; ++idx)
+                {
+                    if (plans[idx].Id == i)
+                    {
+                        queryPlan.update(plans[idx]);
+                        break;
+                    }
+                    if (plans[idx].Id >= plan_basic_id)
+                    {
+                        // ko co trong list
+                        queryPlan.delete(i);
+                        break;
+                    }
+                }
+            }
+
+            // Add
+            for (int i = 0; i < n; ++i)
+            {
+                if (plans[i].Id > plan_basic_id)
+                {
+                    queryPlan.insert(plans[i]);
+                }
+            }
+            #endregion
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveProject();
         }
     }
 }

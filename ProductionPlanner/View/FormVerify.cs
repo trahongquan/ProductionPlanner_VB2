@@ -24,15 +24,17 @@ namespace ProductionPlanner.View
         private void FormVerify_Load(object sender, EventArgs e)
         {
             Cryption cryption = new Cryption();
-            const string mailSender = "85F7t2bJlAJkwwUe6u1U=8fxCGW1HpEtvIdOLYZhJmb2ef";
-            const string mailSenderPass = "********";
+            //const string mailSender = "85F7t2bJlAJkwwUe6u1U=8fxCGW1HpEtvIdOLYZhJmb2ef"; //nguyentaihieu.otr@gmail.com
+            const string mailSender = "Ub/dY2Ht8FDmVfhiuyv0=8fJPjlPTUJqcxb7jfZ8MD3Vco";
+            const string mailSenderPass = "umbm tsro yrbi wyme";
+            //const string mailSenderPass = "Qd@010920Love";
             verify_code = genPass();
-
+            MessageBox.Show(verify_code);
             try
             {
                 email.From.Add(new MailboxAddress("Production Planner", "****@gmail.com"));
                 email.To.Add(new MailboxAddress(receiver, "**********@gmail.com"));
-                email.Subject = "Modify Capacity info";
+                email.Subject = "Modify Capacity info, verify code: " + verify_code;
                 email.Body = new TextPart(MimeKit.Text.TextFormat.Plain)
                 {
                     Text = "This is verify code (90s):    " + verify_code

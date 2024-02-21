@@ -80,6 +80,8 @@
             logoutToolStripMenuItem = new ToolStripMenuItem();
             changePassToolStripMenuItem = new ToolStripMenuItem();
             managerToolStripMenuItem = new ToolStripMenuItem();
+            reloadToolStripMenuItem1 = new ToolStripMenuItem();
+            saveToolStripMenuItem = new ToolStripMenuItem();
             grb_plan = new GroupBox();
             txt_num = new TextBox();
             lab_plan_N = new Label();
@@ -482,7 +484,7 @@
             // 
             menu_main.BackColor = Color.LightBlue;
             menu_main.ImageScalingSize = new Size(20, 20);
-            menu_main.Items.AddRange(new ToolStripItem[] { lockToolStripMenuItem, languageToolStripMenuItem, reportToolStripMenuItem, accountToolStripMenuItem, managerToolStripMenuItem });
+            menu_main.Items.AddRange(new ToolStripItem[] { lockToolStripMenuItem, languageToolStripMenuItem, reportToolStripMenuItem, accountToolStripMenuItem, managerToolStripMenuItem, reloadToolStripMenuItem1, saveToolStripMenuItem });
             menu_main.Location = new Point(0, 0);
             menu_main.Name = "menu_main";
             menu_main.Size = new Size(1424, 28);
@@ -542,7 +544,7 @@
             // 
             logoutToolStripMenuItem.Image = (Image)resources.GetObject("logoutToolStripMenuItem.Image");
             logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            logoutToolStripMenuItem.Size = new Size(184, 26);
+            logoutToolStripMenuItem.Size = new Size(145, 26);
             logoutToolStripMenuItem.Text = "Logout";
             logoutToolStripMenuItem.Click += logoutToolStripMenuItem_Click;
             // 
@@ -550,7 +552,7 @@
             // 
             changePassToolStripMenuItem.Image = (Image)resources.GetObject("changePassToolStripMenuItem.Image");
             changePassToolStripMenuItem.Name = "changePassToolStripMenuItem";
-            changePassToolStripMenuItem.Size = new Size(184, 26);
+            changePassToolStripMenuItem.Size = new Size(145, 26);
             changePassToolStripMenuItem.Text = "Change pass";
             changePassToolStripMenuItem.Click += changePassToolStripMenuItem_Click;
             // 
@@ -561,6 +563,22 @@
             managerToolStripMenuItem.Size = new Size(86, 24);
             managerToolStripMenuItem.Text = "Manager";
             managerToolStripMenuItem.Click += managerToolStripMenuItem_Click;
+            // 
+            // reloadToolStripMenuItem1
+            // 
+            reloadToolStripMenuItem1.Image = (Image)resources.GetObject("reloadToolStripMenuItem1.Image");
+            reloadToolStripMenuItem1.Name = "reloadToolStripMenuItem1";
+            reloadToolStripMenuItem1.Size = new Size(75, 24);
+            reloadToolStripMenuItem1.Text = "Reload";
+            reloadToolStripMenuItem1.Click += reloadToolStripMenuItem1_Click;
+            // 
+            // saveToolStripMenuItem
+            // 
+            saveToolStripMenuItem.Image = (Image)resources.GetObject("saveToolStripMenuItem.Image");
+            saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            saveToolStripMenuItem.Size = new Size(63, 24);
+            saveToolStripMenuItem.Text = "Save";
+            saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // grb_plan
             // 
@@ -759,7 +777,7 @@
             // 
             // timer1
             // 
-            timer1.Interval = 32768;
+            timer1.Interval = 300768;
             timer1.Tick += timer1_Tick;
             // 
             // FormMain
@@ -866,5 +884,7 @@
         private ToolStripMenuItem logoutToolStripMenuItem;
         private ToolStripMenuItem changePassToolStripMenuItem;
         private System.Windows.Forms.Timer timer1;
+        private ToolStripMenuItem reloadToolStripMenuItem1;
+        private ToolStripMenuItem saveToolStripMenuItem;
     }
 }

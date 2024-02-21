@@ -38,28 +38,31 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(16, 15);
+            label1.Location = new Point(14, 11);
             label1.Name = "label1";
-            label1.Size = new Size(138, 38);
+            label1.Size = new Size(108, 30);
             label1.TabIndex = 0;
             label1.Text = "Password:";
             // 
             // txt_pass
             // 
             txt_pass.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
-            txt_pass.Location = new Point(168, 12);
+            txt_pass.Location = new Point(147, 9);
+            txt_pass.Margin = new Padding(3, 2, 3, 2);
             txt_pass.Name = "txt_pass";
-            txt_pass.Size = new Size(441, 43);
+            txt_pass.Size = new Size(386, 36);
             txt_pass.TabIndex = 1;
+            txt_pass.KeyDown += txt_pass_KeyDown;
             // 
             // btn_ok
             // 
             btn_ok.BackColor = SystemColors.HotTrack;
             btn_ok.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             btn_ok.ForeColor = SystemColors.ButtonHighlight;
-            btn_ok.Location = new Point(394, 61);
+            btn_ok.Location = new Point(345, 46);
+            btn_ok.Margin = new Padding(3, 2, 3, 2);
             btn_ok.Name = "btn_ok";
-            btn_ok.Size = new Size(94, 40);
+            btn_ok.Size = new Size(82, 30);
             btn_ok.TabIndex = 2;
             btn_ok.Text = "OK";
             btn_ok.UseVisualStyleBackColor = false;
@@ -67,14 +70,15 @@
             // 
             // FormLock
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightSkyBlue;
-            ClientSize = new Size(621, 113);
+            ClientSize = new Size(543, 85);
             Controls.Add(btn_ok);
             Controls.Add(txt_pass);
             Controls.Add(label1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "FormLock";
             Text = "Unlock";
             FormClosed += FormLock_FormClosed;

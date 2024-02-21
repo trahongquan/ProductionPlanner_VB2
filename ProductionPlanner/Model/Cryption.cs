@@ -23,6 +23,7 @@ namespace ProductionPlanner.Model
         private string Complicate(string st)
         {
             st += @"8f";
+            //chia thành 2 nửa chuỗi bằng nhau
             string st1 = st.Substring(0, st.Length >> 1);
             string st2 = st.Substring(st.Length >> 1);
 
@@ -61,13 +62,13 @@ namespace ProductionPlanner.Model
         #region crypt
         public string getMD5(string plainText)
         {
-            plainText = Complicate(plainText);
+            plainText = Complicate(plainText); // xáo trộn
 
             string str_md5 = "";
-            byte[] arr = System.Text.Encoding.UTF8.GetBytes(plainText);
+            byte[] arr = System.Text.Encoding.UTF8.GetBytes(plainText); // chuyển chuỗi thành mã ASCII, ví dụ: [97, 110, 97, 32, 72, 97, 109, 32, 70, 102, 108, 111]
 
             MD5CryptoServiceProvider my_md5 = new MD5CryptoServiceProvider();
-            arr = my_md5.ComputeHash(arr);
+            arr = my_md5.ComputeHash(arr); // 
             int n = arr.Length;
 
             for (int i = 0; i < n; ++i)

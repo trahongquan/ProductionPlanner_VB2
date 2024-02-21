@@ -1,27 +1,27 @@
-﻿using System;
+﻿    using System;
 
-namespace ProductionPlanner.Model
-{
-    public class Constraint
+    namespace ProductionPlanner.Model
     {
-        public double[] variables;
-        public double b;
-        public string sign;
-
-        public Constraint(double[] variables, double b, string sign)
+        public class Constraint
         {
-            if (sign == "=" || sign == "<=" || sign == ">=")
+            public double[] variables;
+            public double b;
+            public string sign;
+
+            public Constraint(double[] variables, double b, string sign)
             {
-                this.variables = variables;
-                this.b = b;
-                this.sign = sign;
+                if (sign == "=" || sign == "<=" || sign == ">=")
+                {
+                    this.variables = variables;
+                    this.b = b;
+                    this.sign = sign;
                 
-            } else
-            {
+                } else
+                {
 
-                throw new ArgumentException("Wrong sign");
+                    throw new ArgumentException("Wrong sign");
 
+                }
             }
         }
     }
-}

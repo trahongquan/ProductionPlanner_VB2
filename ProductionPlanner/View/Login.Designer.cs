@@ -76,6 +76,7 @@
             txt_user.Name = "txt_user";
             txt_user.Size = new Size(366, 33);
             txt_user.TabIndex = 2;
+            txt_user.Text = "admin";
             // 
             // txt_pass
             // 
@@ -84,6 +85,7 @@
             txt_pass.Name = "txt_pass";
             txt_pass.Size = new Size(366, 33);
             txt_pass.TabIndex = 4;
+            txt_pass.Text = "123";
             txt_pass.UseSystemPasswordChar = true;
             txt_pass.KeyPress += txt_pass_KeyPress;
             // 

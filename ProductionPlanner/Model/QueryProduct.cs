@@ -33,6 +33,34 @@ namespace ProductionPlanner.Model
             return accountTab;
         }
 
+        public Product get_Product_by_name(string name)  // Lấy dữ liệu đổ ra bảng
+        {
+            DataTable accountTab = new DataTable();
+            string query = "SELECT * FROM Products WHERE name = '"+ name + "'";
+            try
+            {
+                using (SqlConnection sqlConnection = Connection.getConnection())
+                {
+                    sqlConnection.Open();
+                    dataAdapter = new SqlDataAdapter(query, sqlConnection);
+                    dataAdapter.Fill(accountTab);
+                    sqlConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi truy vấn\n" + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw ex;
+            }
+            return new Product(int.Parse(accountTab.Rows[0][0].ToString()),
+                new Cryption().getEncrypt(accountTab.Rows[0][1].ToString()),
+                double.Parse(accountTab.Rows[0][2].ToString()),
+                double.Parse(accountTab.Rows[0][3].ToString()),
+                int.Parse(accountTab.Rows[0][4].ToString()),
+                int.Parse(accountTab.Rows[0][5].ToString()),
+                double.Parse(accountTab.Rows[0][6].ToString()));
+        }
+
         public void insert(Product product)
         {
             SqlConnection sqlConnection = Connection.getConnection();

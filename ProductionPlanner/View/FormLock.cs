@@ -14,8 +14,7 @@ namespace ProductionPlanner.View
     public partial class FormLock : Form
     {
         private bool is_exit = true;
-        private string pass
-            = "jfksfhiwfy9yfdhfkfhkafhkafhakfhakfh";
+        private string pass = "jfksfhiwfy9yfdhfkfhkafhkafhakfhakfh";
         public FormLock(string pass)
         {
             InitializeComponent();
@@ -41,6 +40,14 @@ namespace ProductionPlanner.View
             else
             {
                 MessageBox.Show("Your password is wrong");
+            }
+        }
+
+        private void txt_pass_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btn_ok_Click(sender, e);
             }
         }
     }

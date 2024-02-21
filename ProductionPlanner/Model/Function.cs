@@ -4,7 +4,7 @@
     {
         public double[] variables;
         public double c;
-        public bool isExtrMax;
+        public bool isExtrMax;  //true là tìm MAX
 
         public Function(double[] variables, double c, bool isExtrMax)
         {

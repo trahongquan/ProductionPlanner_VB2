@@ -1,0 +1,76 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\VB2\\10. Git Code Tham khao\\ProductionPlanner_VB2\\TestFunction\\TestFunction.csproj": {}
+  },
+  "projects": {
+    "D:\\VB2\\10. Git Code Tham khao\\ProductionPlanner_VB2\\TestFunction\\TestFunction.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\VB2\\10. Git Code Tham khao\\ProductionPlanner_VB2\\TestFunction\\TestFunction.csproj",
+        "projectName": "TestFunction",
+        "projectPath": "D:\\VB2\\10. Git Code Tham khao\\ProductionPlanner_VB2\\TestFunction\\TestFunction.csproj",
+        "packagesPath": "C:\\Users\\Quan\\.nuget\\packages\\",
+        "outputPath": "D:\\VB2\\10. Git Code Tham khao\\ProductionPlanner_VB2\\TestFunction\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Quan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "dependencies": {
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.100.3, )"
+            },
+            "Eramake.eCryptography": {
+              "target": "Package",
+              "version": "[1.1.6, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[3.6.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.5, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-arm64": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

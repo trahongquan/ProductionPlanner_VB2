@@ -95,6 +95,7 @@ namespace ProductionPlanner.Object
         }
         public string get_list_id()
         {
+            if (list_product.Count == 0) return "";
             string st = list_product[0].Id.ToString();
             int n = list_product.Count;
 
@@ -142,8 +143,9 @@ namespace ProductionPlanner.Object
             double tmp_labor = 0, tmp_budget = 0;
             for (int i = 0; i < n; ++i)
             {
-                tmp_labor += list_product[i].Lower * list_product[i].Labor_cost;
-                tmp_budget += list_product[i].Lower * list_product[i].Material_cost;
+                //Lấy ra biến tạm 
+                tmp_labor += list_product[i].Lower * list_product[i].Labor_cost; // số lượng thấp nhất * giá nhân công = Min_labor
+                tmp_budget += list_product[i].Lower * list_product[i].Material_cost; // số lượng thấp nhất * giá vật liệu = Min_buget
             }
 
             if (tmp_labor <= hour && tmp_budget <= budget)
@@ -171,8 +173,10 @@ namespace ProductionPlanner.Object
 
             // Cac rang buoc
             int variablesCount = list_product.Count;
-            int constraintsCount = (variablesCount << 1) + 2;
-           
+            int constraintsCount = (variablesCount << 1) + 2; //<<: Toán tử dịch bit sang trái.
+                                                              //vd: variablesCount = 3 (là 11) thì constraintsCount = 6 (111)
+                                                              //"+2": Thêm 2 để bao gồm ràng buộc tổng sản lượng và ràng buộc phi âm.
+
             Constraint[] constraints = new Constraint[constraintsCount];
             double[] variables = new double[variablesCount];
 
