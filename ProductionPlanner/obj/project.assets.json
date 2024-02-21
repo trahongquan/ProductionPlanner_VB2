@@ -5709,11 +5709,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "D:\\VB2\\10. Git Code Tham khao\\ProductionPlanner_VB2\\ProductionPlanner\\ProductionPlanner.csproj",
       "projectName": "ProductionPlanner",
       "projectPath": "D:\\VB2\\10. Git Code Tham khao\\ProductionPlanner_VB2\\ProductionPlanner\\ProductionPlanner.csproj",
       "packagesPath": "C:\\Users\\Quan\\.nuget\\packages\\",
       "outputPath": "D:\\VB2\\10. Git Code Tham khao\\ProductionPlanner_VB2\\ProductionPlanner\\obj\\",
+=======
+      "projectUniqueName": "D:\\VB2\\4. Ki.IV\\HTTQD\\ProductionPlanner_VB2\\ProductionPlanner\\ProductionPlanner.csproj",
+      "projectName": "ProductionPlanner",
+      "projectPath": "D:\\VB2\\4. Ki.IV\\HTTQD\\ProductionPlanner_VB2\\ProductionPlanner\\ProductionPlanner.csproj",
+      "packagesPath": "C:\\Users\\Quan\\.nuget\\packages\\",
+      "outputPath": "D:\\VB2\\4. Ki.IV\\HTTQD\\ProductionPlanner_VB2\\ProductionPlanner\\obj\\",
+>>>>>>> ad7055463701490afbc423f82df2bb55beaa8e17
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -5782,7 +5790,11 @@
             "privateAssets": "none"
           }
         },
+<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+>>>>>>> ad7055463701490afbc423f82df2bb55beaa8e17
       }
     }
   },

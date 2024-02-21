@@ -14,6 +14,10 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ProductionPlanner
+<<<<<<< HEAD
 build_property.ProjectDir = D:\VB2\10. Git Code Tham khao\ProductionPlanner_VB2\ProductionPlanner\
+=======
+build_property.ProjectDir = D:\VB2\4. Ki.IV\HTTQD\ProductionPlanner_VB2\ProductionPlanner\
+>>>>>>> ad7055463701490afbc423f82df2bb55beaa8e17
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
