@@ -2697,11 +2697,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VB2\\10. Git Code Tham khao\\ProductionPlanner_VB2\\TestFunction\\TestFunction.csproj",
+      "projectUniqueName": "D:\\VB2\\4. Ki.IV\\1. HTTQD\\ProductionPlanner_VB2\\TestFunction\\TestFunction.csproj",
       "projectName": "TestFunction",
-      "projectPath": "D:\\VB2\\10. Git Code Tham khao\\ProductionPlanner_VB2\\TestFunction\\TestFunction.csproj",
+      "projectPath": "D:\\VB2\\4. Ki.IV\\1. HTTQD\\ProductionPlanner_VB2\\TestFunction\\TestFunction.csproj",
       "packagesPath": "C:\\Users\\Quan\\.nuget\\packages\\",
-      "outputPath": "D:\\VB2\\10. Git Code Tham khao\\ProductionPlanner_VB2\\TestFunction\\obj\\",
+      "outputPath": "D:\\VB2\\4. Ki.IV\\1. HTTQD\\ProductionPlanner_VB2\\TestFunction\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -2761,5 +2761,21 @@
         "#import": []
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'System.Data.SqlClient' 4.8.5 has a known high severity vulnerability, https://github.com/advisories/GHSA-98g6-xh36-x2p7",
+      "libraryId": "System.Data.SqlClient",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.7.2",
+        ".NETFramework,Version=v4.7.2/win",
+        ".NETFramework,Version=v4.7.2/win-arm64",
+        ".NETFramework,Version=v4.7.2/win-x64",
+        ".NETFramework,Version=v4.7.2/win-x86"
+      ]
+    }
+  ]
 }

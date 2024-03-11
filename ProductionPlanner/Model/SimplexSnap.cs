@@ -4,6 +4,10 @@ namespace ProductionPlanner.Model
 {
     public class SimplexSnap
     {
+        //Lớp này đại diện cho một bước trung gian trong thuật toán Simplex.
+        //Nó lưu trữ trạng thái của ma trận Simplex và các biến khác liên quan trong quá trình giải quyết bài toán tối ưu.
+        //Nó cung cấp phương thức để sao chép mảng và ma trận.
+
         public double[] b;
         public double[][] matrix;
         public double[] M;

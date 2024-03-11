@@ -9658,7 +9658,7 @@
   <data name="saveToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAACzJJREFUeF7tnXtsU9cdx2mlqtv+6D/VtErTNm3q1GnTBiWx4+sYGyoebdVBWVU6
+        wAAADsABataJCQAACzJJREFUeF7tnXtsU9cdx2mlqtv+6D/VtErTNm3q1GnTBiWx4+sYGyoebdVBWVU6
         tmpSYdJUWonSx1oJbYxp2qCIrhRYHAoEiA2UV2ChkNCFRx52QgIJJDjXBhrIAiliSXjlScjZOfeeG0xz
         bnxtH9v3+vy+0kcIGl+b8/34Pn73VkyAQMbEtqvtCYdPXuLwhUskv9wwaXVZ4y9WljIJXvyqcWhoSHhe
         3nyCuT6EiSsPBh1bW/ZIvvByZ3Fk5g+K2r5Bl9pcefJQ5FGHP7wClz7g9IeRxtOry9GkDz9nggVAeAGE
@@ -10834,6 +10834,9 @@
   </data>
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>422, 17</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>81</value>
   </metadata>
   <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

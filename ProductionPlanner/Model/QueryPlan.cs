@@ -93,7 +93,7 @@ namespace ProductionPlanner.Model
         public void delete(int id)
         {
             SqlConnection sqlConnection = Connection.getConnection();
-            string query = "Delete Plan Where id = " + id;
+            string query = "Delete Plans Where id = " + id;
 
             try
             {

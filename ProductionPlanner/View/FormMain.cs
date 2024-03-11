@@ -623,12 +623,13 @@ namespace ProductionPlanner.View
         {
             //delete plans
             is_change = true;
-            if (plans.Count <= 1)
-            {
-                return;
-            }
+            //if (plans.Count <= 1)
+            //{
+            //    return;
+            //}
 
             int idx = dtgv_plan.SelectedRows[0].Index;
+            queryPlan.delete(plans[idx].Id);
             plans.RemoveAt(idx);
             dtgv_plan.Rows.RemoveAt(idx);
         }
@@ -664,7 +665,7 @@ namespace ProductionPlanner.View
                         {
                             dtgv_product.Rows[i].DefaultCellStyle.ForeColor = Color.Red;
                             dtgv_product.Rows[i].DefaultCellStyle.SelectionForeColor = Color.Gold;
-                            dtgv_product.Rows[i].Cells[6].Value = plans[idx].List_product[i].Quantity.ToString();
+                            dtgv_product.Rows[i].Cells[6].Value = plans[idx].List_product[j].Quantity.ToString();
                         }
                     }
                 }
@@ -837,7 +838,7 @@ namespace ProductionPlanner.View
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             timer1.Stop();
-            //SaveProject();
+            SaveProject();
         }
 
         private void changePassToolStripMenuItem_Click(object sender, EventArgs e)
