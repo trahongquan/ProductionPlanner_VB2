@@ -26,9 +26,13 @@ namespace ProductionPlanner.Services
                 this.function = Canonize(function);
             }
 
+            double[] x = b;
             getMatrix(constraints);
+            double[] c = b;
             getFunctionArray();
+            double[] d = b;
             getMandF();
+            double[] e = b;
 
             for(int i = 0; i < F.Length; i++)
             {
@@ -47,6 +51,13 @@ namespace ProductionPlanner.Services
             while (result.result == SimplexResult.NotYetFound && i < 100)
             {
                 calculateSimplexTableau(result.index);
+                /* Vẫn còn lỗi tại đây: mã lỗi : errorProductPlans
+                 * 
+                 *dựa vào các đoạn mã trên hãy giải thích tại sao khi tôi cung cấp đầu vào cho bài toán simplex giải quyết lại ra hai kết quả khác nhau.
+                đầu vào gồm (tên sp, vật liệu, giờ công, số lượng thấp nhất, số lượng cao nhất, lợi nhuận trên 1 sản phẩm)
+                1. đầu vào thứ nhất: (SP4,2,3,400,1000,4000) cho kết quả số lượng cần sản xuất là 1400 và lợi nhuận là 5600000 - đây là kết quả sai
+                2. đầu vào thứ nhất: (SP10,2,3,350,1000,4000) cho kết quả số lượng cần sản xuất là 400 và lợi nhuận là 1600000 - đây là kết quả đúng
+                 */
                 snaps.Add(new SimplexSnap(b, matrix, M, F, C, functionVariables, isMDone, m));
                 result = nextStep();
                 i++;

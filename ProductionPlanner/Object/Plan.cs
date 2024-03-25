@@ -224,6 +224,7 @@ namespace ProductionPlanner.Object
             for (int i = 0; i < variablesCount; ++i)
             {
                 total_profit += list_product[i].Quantity * list_product[i].Profit;
+                //MessageBox.Show(list_product[i].Quantity.ToString());
             }
         }
     }
