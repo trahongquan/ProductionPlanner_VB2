@@ -6,16 +6,15 @@ namespace ProductionPlanner.Services
     
     public class Simplex
     {
-        
         Function function;
 
-        double[] functionVariables;
-        double[][] matrix;
-        double[] b;
-        bool[] m;
-        double[] M;
-        double[] F;
-        int[] C;
+        double[] functionVariables; //biến hàm mục tiêu
+        double[][] matrix; //ma trận ràng buộc các biến
+        double[] b; //vế phải các phương trình ràng buộc
+        bool[] m; //đánh dấu là biến cơ bản
+        double[] M; // mảng hệ số của biến cơ bản
+        double[] F; // mảng hệ số của biến không cơ bản (biến phụ)
+        int[] C; //mảng chứa chỉ số biến cơ bản
         bool isMDone = false;
         public Simplex(Function function, Constraint[] constraints)
         {
@@ -56,6 +55,7 @@ namespace ProductionPlanner.Services
             return new Tuple<List<SimplexSnap>, SimplexResult>(snaps,result.result);
         }
 
+        //tính toán bảng Simplex mới dựa trên kết quả của bước Simplex trước đó
         void calculateSimplexTableau(Tuple<int,int> Xij)
         {
             double[][] newMatrix = new double[matrix.Length][];
@@ -129,6 +129,7 @@ namespace ProductionPlanner.Services
             }
         }
 
+        //tiến hành một bước Simplex tiếp theo và lưu trữ kết quả trong đối tượng result
         SimplexIndexResult nextStep()
         {
 
@@ -418,3 +419,34 @@ namespace ProductionPlanner.Services
         } 
     }
 }
+/*
+ Các biến thành viên:
+
+function: Đại diện cho hàm mục tiêu cần tối ưu.
+functionVariables: Mảng các biến của hàm mục tiêu.
+matrix: Ma trận ràng buộc của các biến.
+b: Mảng các giá trị bên phải của các ràng buộc.
+m: Mảng boolean đánh dấu các biến cơ bản.
+M: Mảng chứa tổng các hệ số của biến cơ bản trong các ràng buộc.
+F: Mảng chứa tổng các hệ số của biến không cơ bản trong các ràng buộc.
+C: Mảng chứa chỉ số của biến cơ bản trong ma trận.
+isMDone: Boolean đánh dấu xem việc tính toán M đã hoàn thành hay chưa.
+Phương thức khởi tạo:
+
+Simplex(Function function, Constraint[] constraints): Nhận vào một hàm mục tiêu và một mảng các ràng buộc, tiến hành chuẩn hóa hàm mục tiêu (nếu cần) và xây dựng ma trận ràng buộc.
+Phương thức GetResult():
+
+Trả về một Tuple chứa danh sách các bước tính toán giữa các bảng Simplex và kết quả cuối cùng của thuật toán Simplex.
+Các phương thức hỗ trợ:
+
+calculateSimplexTableau(Tuple<int, int> Xij): Tính toán bảng Simplex mới dựa trên chỉ số Xij cho biến cơ bản.
+getMandF(): Tính toán các mảng M và F dựa trên ma trận và các biến.
+nextStep(): Thực hiện bước tiếp theo của thuật toán Simplex để tìm kiếm biến cơ bản tiếp theo.
+getIndexOfNegativeElementWithMaxAbsoluteValue(double[] array): Trả về chỉ số của phần tử âm có giá trị tuyệt đối lớn nhất trong một mảng.
+getIndexOfMinimalRatio(double[] column, double[] b): Trả về chỉ số của phần tử nhỏ nhất trong tỷ lệ của một cột với mảng b.
+getFunctionArray(): Xây dựng mảng functionVariables từ hàm mục tiêu.
+Canonize(Function function): Chuẩn hóa hàm mục tiêu (đảo dấu hệ số).
+appendColumn(double[][] matrix, double[] column): Thêm một cột vào ma trận.
+append<T>(T[] array, T element): Thêm một phần tử vào một mảng.
+getColumn(double value, int place, int length): Tạo một cột mới với giá trị xác định tại một vị trí cụ thể.
+ */

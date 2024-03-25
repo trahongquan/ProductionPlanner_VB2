@@ -861,11 +861,12 @@ namespace ProductionPlanner.View
             {
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    try
+                    /*try
                     {
                         using (XLWorkbook workbook = new XLWorkbook())
                         {
-                            workbook.Worksheets.Add((DataTable)dtgv_product.DataSource, "Products List");
+                            workbook.Worksheets.Add((DataTable) queryProduct.get_data_source(), "Products List");
+                            //workbook.Worksheets.Add((DataTable)dtgv_product.DataSource, "Products List");
                             workbook.SaveAs(sfd.FileName);
                             MessageBox.Show("Sucessfuly Export to Excel", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
@@ -873,6 +874,35 @@ namespace ProductionPlanner.View
                     catch
                     {
                         MessageBox.Show("Failed Export to Excel", "Fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }*/
+                    try
+                    {
+                        using (XLWorkbook workbook = new XLWorkbook())
+                        {
+                            DataTable dataTable = (DataTable)queryProduct.get_data_source();
+
+                            for (int i = 0; i < dataTable.Rows.Count; i++)
+                            {
+                                // Lấy giá trị số lượng từ cột số lượng của dtgv_product
+                                string name = dtgv_product.Rows[i].Cells["Name"].Value.ToString();
+                                dataTable.Rows[i]["Name"] = name;
+                            }
+                            // Thêm cột số lượng vào bảng
+                            dataTable.Columns.Add("Quantity", typeof(int));
+                            for (int i = 0; i < dataTable.Rows.Count; i++)
+                            {
+                                // Lấy giá trị số lượng từ cột số lượng của dtgv_product
+                                int quantity = Convert.ToInt32(dtgv_product.Rows[i].Cells["Quantity"].Value);
+                                dataTable.Rows[i]["Quantity"] = quantity;
+                            }
+                            workbook.Worksheets.Add(dataTable, "Products List");
+                            workbook.SaveAs(sfd.FileName);
+                            MessageBox.Show("Successfully Exported to Excel", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error exporting to Excel: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

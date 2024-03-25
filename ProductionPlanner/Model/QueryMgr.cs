@@ -5,6 +5,7 @@ using System.Data;
 namespace ProductionPlanner.Model
 {
     internal class QueryMgr
+        //Truy vấn lấy dữ liệu về quản lý tài khoản
     {
         private SqlDataAdapter dataAdapter;
         private SqlCommand sqlCMD;

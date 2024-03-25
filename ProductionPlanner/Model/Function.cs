@@ -1,6 +1,7 @@
 ﻿namespace ProductionPlanner.Model
 {
     public class Function
+        //Lớp này thể hiện hàm mục tiêu
     {
         public double[] variables;
         public double c;

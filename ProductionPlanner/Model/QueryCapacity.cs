@@ -6,6 +6,7 @@ using System.Data;
 namespace ProductionPlanner.Model
 {
     internal class QueryCapacity
+        //truy vấn đến dữ liệu về công suất
     {
         private SqlDataAdapter dataAdapter;
         private SqlCommand sqlCMD;

@@ -71,7 +71,7 @@ namespace ProductionPlanner.Object
 
             if (upper <= 0)
             {
-                upper = Int32.MaxValue;
+                upper = Int32.MaxValue; 
             }
 
             if (lower > upper)

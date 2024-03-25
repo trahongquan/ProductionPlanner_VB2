@@ -3,6 +3,7 @@
 namespace ProductionPlanner.Model
 {
     internal class Cryption
+        //Lớp này hỗ trợ mã hóa tên sản phẩm
     {
         public Cryption()
         {

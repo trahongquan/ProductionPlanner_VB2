@@ -171,7 +171,7 @@ namespace ProductionPlanner.Object
                 return;
             }
 
-            // Cac rang buoc
+            // Thiết lập Các rang buoc
             int variablesCount = list_product.Count;
             int constraintsCount = (variablesCount << 1) + 2; //<<: Toán tử dịch bit sang trái.
                                                               //vd: variablesCount = 3 (là 11) thì constraintsCount = 6 (111)
@@ -192,7 +192,7 @@ namespace ProductionPlanner.Object
                 constraints[i + variablesCount] = new Constraint(variables, list_product[i].Upper, "<=");
             }
 
-            // Ham toi uu
+            // Thiết lập Ham mục tiêu
             double[] functionVariables = new double[variablesCount];
             for (int i = 0; i < variablesCount; i++)
             {
